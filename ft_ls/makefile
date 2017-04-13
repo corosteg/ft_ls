@@ -6,22 +6,23 @@
 #    By: corosteg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/10 13:46:33 by corosteg          #+#    #+#              #
-#    Updated: 2017/04/10 15:26:43 by corosteg         ###   ########.fr        #
+#    Updated: 2017/04/13 17:45:32 by corosteg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
-LIB_PATH = ./libft/
+LIB_PATH = ./srcs/libft/
 LIB = $(LIB_PATH)/libft.a
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
-SRCS = main.c
+FLAGS = -Wall -Werror -Wextra -fsanitize=address
+SRCS = ./srcs/ft_ls.c \
+	   ./srcs/check_flags.c
 
 all: $(NAME)
 
 $(NAME): 
 		@echo "\033[31m" "Compiling" [ $(NAME) ] 
-		make -C ./libft/
+		make -C $(LIB_PATH)
 		$(CC) $(FLAGS) $(SRCS) $(LIB) -o $(NAME)
 		@echo "\033[32m" "ft_ls has been Created"
 cc:
@@ -29,11 +30,11 @@ cc:
 
 clean:
 		@echo "\033[34m" "Deleting"
-		make -C ./libft/ clean
+		make -C $(LIB_PATH) clean
 
 fclean:
 		@echo "\033[34m" "Deleting"
 		/bin/rm -f $(NAME)
-		make -C ./libft/ fclean
+		make -C $(LIB_PATH) fclean
 
 re: fclean all

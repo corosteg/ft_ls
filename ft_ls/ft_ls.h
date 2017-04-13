@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:55:48 by corosteg          #+#    #+#             */
-/*   Updated: 2017/04/11 15:17:43 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/04/13 17:16:23 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@
 # include <errno.h>
 # include <dirent.h>
 
+typedef struct	t_ls
+{
+	int			R;
+	int			a;
+	int			l;
+	int			r;
+	int			t;
+}				s_ls;
 
-int			main(int arc, char **arv);
+int				main(int arc, char **arv);
 
 #endif
