@@ -6,16 +6,16 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 17:30:22 by corosteg          #+#    #+#             */
-/*   Updated: 2017/04/13 17:37:41 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:14:48 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		valid_flag(char c, s_ls *tab)
+void		valid_flag(char c, t_ls *tab)
 {
 	if (c == 'R')
-		tab->R = 1;
+		tab->br = 1;
 	if (c == 'a')
 		tab->a = 1;
 	if (c == 'l')
@@ -34,7 +34,7 @@ int			illegal_option(char c)
 	return (0);
 }
 
-int			check_flags(char *str, s_ls *tab)
+int			check_flags(char *str, t_ls *tab)
 {
 	int		a;
 

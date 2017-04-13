@@ -6,7 +6,7 @@
 #    By: corosteg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 20:49:17 by corosteg          #+#    #+#              #
-#    Updated: 2016/11/24 17:58:19 by corosteg         ###   ########.fr        #
+#    Updated: 2017/04/13 19:08:13 by corosteg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,9 +78,11 @@ SRC = ft_atoi.c\
 	  ft_strupcase.c\
 	  ft_islower.c\
 	  ft_isupper.c\
+	  ft_strfreejoin.c\
 	  ft_swap.c
 
 SRCO = ft_atoi.o\
+	  ft_strfreejoin.o\
 	  ft_isalnum.o\
 	  ft_isalpha.o\
 	  ft_isascii.o\
