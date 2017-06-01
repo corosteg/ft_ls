@@ -6,7 +6,7 @@
 /*   By: paoroste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 19:48:25 by paoroste          #+#    #+#             */
-/*   Updated: 2016/11/29 17:16:27 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/05/31 16:41:07 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static char		*n_is_positive(int nbr, int i)
 		nbr = nbr / 10;
 		i--;
 	}
-	str = ft_strdup(str);
 	return (str);
 }
 
@@ -47,7 +46,6 @@ static char		*n_is_negative(int nbr, int i)
 		i--;
 	}
 	str[i] = '-';
-	str = ft_strdup(str);
 	return (str);
 }
 

@@ -6,14 +6,17 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 20:29:00 by corosteg          #+#    #+#             */
-/*   Updated: 2017/04/13 19:08:50 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/05/31 17:53:34 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
+# include <stdarg.h>
+# include <wchar.h>
 # include <unistd.h>
+# define PRINT_LL "dDioOuUxX"
 
 typedef struct		s_list
 {
@@ -89,5 +92,7 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					ft_islower(int c);
 int					ft_isupper(int c);
+int					ft_print(const char *format, ...);
+char				*apply_list(char c, va_list ap);
 
 #endif

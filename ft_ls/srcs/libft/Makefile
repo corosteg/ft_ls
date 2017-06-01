@@ -6,7 +6,7 @@
 #    By: corosteg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 20:49:17 by corosteg          #+#    #+#              #
-#    Updated: 2017/04/13 19:08:13 by corosteg         ###   ########.fr        #
+#    Updated: 2017/05/31 17:40:09 by corosteg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,9 @@ SRC = ft_atoi.c\
 	  ft_islower.c\
 	  ft_isupper.c\
 	  ft_strfreejoin.c\
-	  ft_swap.c
+	  ft_swap.c\
+	  ft_print.c\
+	  ft_print_aplist.c
 
 SRCO = ft_atoi.o\
 	  ft_strfreejoin.o\
@@ -144,7 +146,9 @@ SRCO = ft_atoi.o\
 	  ft_strupcase.o\
 	  ft_islower.o\
 	  ft_isupper.o\
-	  ft_swap.o
+	  ft_swap.o\
+	  ft_print.o\
+	  ft_print_aplist.o
 
 all: $(NAME)
 

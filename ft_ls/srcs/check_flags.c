@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 17:30:22 by corosteg          #+#    #+#             */
-/*   Updated: 2017/04/13 19:14:48 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/01 13:30:20 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ int			check_flags(char *str, t_ls *tab)
 		return (illegal_option(str[2]));
 	while (str[a])
 	{
-		if (str[a] != 'a' && str[a] != 'l' && str[a] != 'r' && str[a] != 'R'
-				&& str[a] != 't' && str[a] != '-')
+		if ((str[a] != 'a' && str[a] != 'l' && str[a] != 'r' && str[a] != 'R'
+				&& str[a] != 't' && str[a] != '-') || (str[a] == '-' &&
+					str[a + 1] == '-' && (str[a + 2] != ' ' &&
+						str[a + 2] != '\0')))
 			return (illegal_option(str[a]));
 		valid_flag(str[a], tab);
 		a++;
