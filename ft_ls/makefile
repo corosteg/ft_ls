@@ -6,7 +6,7 @@
 #    By: corosteg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/10 13:46:33 by corosteg          #+#    #+#              #
-#    Updated: 2017/04/13 18:01:33 by corosteg         ###   ########.fr        #
+#    Updated: 2017/06/02 18:09:50 by corosteg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ls
 LIB_PATH = ./srcs/libft/
 LIB = $(LIB_PATH)/libft.a
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 SRCS = ./srcs/ft_ls.c \
 	   ./srcs/check_flags.c
 

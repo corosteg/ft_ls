@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:55:48 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/01 19:27:07 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/02 18:23:38 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct		t_ls
 typedef	struct		s_ent
 {
 	int				type;
-	char			*name;
+	DIR				*file;
 	struct stat		*stat;
 	struct s_ent	*next;
 }					s_ent;

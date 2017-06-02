@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:54:04 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/01 19:43:03 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/02 18:23:28 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_ls.h"
 #include <stdio.h>
 
-int				main()
+int				main(int ac, char **av)
 {
 	int				i;
 	DIR				*rep;
@@ -24,7 +24,7 @@ int				main()
 	s_ent			*info;
 	char			*tmp;
 
-	path = ft_strdup("libft");
+	path = ft_strdup(av[1]);
 	rep = opendir(path);
 	if (rep == NULL)
 	{
@@ -38,15 +38,20 @@ int				main()
 		//i = c;
 		tmp = ft_strdup(path);
 		if (ent->d_name[0] == '.' && ent->d_name[1] == '\0')
-			stat("./", info->stat);
+			stat(".", info->stat);
 		else if (ent->d_name[0] == '.' && ent->d_name[1] == '.')
-			stat("../", info->stat);
+			stat("..", info->stat);
 		else if (ent->d_type == 4)
-			stat((ft_strjoin(tmp, "/") && ft_strjoin(tmp, ent->d_name)), info->stat);
+		{
+			ft_strjoin(tmp, "/");
+			stat(ft_strjoin(tmp, ent->d_name), info->stat);
+		}
 		else
 			stat(ft_strjoin(tmp, ent->d_name), info->stat);
 		printf("%s : ", ent->d_name);
-		printf("%lli\n", info->stat->st_size);
+		printf("%lli       type : %d       inode : %lli\n",
+				info->stat->st_size, ent->d_type, ent->d_ino);
+		/* lien symbolique d_type(lli)8, lien physique d_type(lli)10*/
 	}
-	return (0);
+	return (ac);
 }
