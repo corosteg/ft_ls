@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:55:48 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/02 18:23:38 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/08 19:41:32 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,19 @@ typedef struct		t_ls
 	int				l;
 	int				r;
 	int				t;
+	int				zero;
 }					t_ls;
 
 typedef	struct		s_ent
 {
-	int				type;
-	DIR				*file;
-	struct stat		*stat;
+	struct dirent	*file;
+	struct stat		fstat;
 	struct s_ent	*next;
 }					s_ent;
 
 int				main(int arc, char **arv);
-int				check_flags(char *str, t_ls *tab);
+t_ls			check_flags(char *str, t_ls tab);
+s_ent			*sort_list(s_ent *list, t_ls tab);
+char			*change_path(char *path, char *name);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 20:29:00 by corosteg          #+#    #+#             */
-/*   Updated: 2017/05/31 17:53:34 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:30:44 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int					ft_islower(int c);
 int					ft_isupper(int c);
 int					ft_print(const char *format, ...);
 char				*apply_list(char c, va_list ap);
+char				*ft_freejoin(char const *s1, char const *s2, int f);
 
 #endif

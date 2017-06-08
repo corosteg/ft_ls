@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_ls_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/14 17:17:05 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/07 17:25:53 by corosteg         ###   ########.fr       */
+/*   Created: 2017/06/05 15:07:35 by corosteg          #+#    #+#             */
+/*   Updated: 2017/06/07 17:48:31 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char		*change_path(char *path, char *name)
 {
-	int		a;
-	char	*str;
-
-	if (s1 == 0 || s2 == 0)
-		return (0);
-	a = (ft_strlen(s1) + ft_strlen(s2));
-	str = (char*)malloc(sizeof(char) * (a + 1));
-	if (str == 0)
-		return (0);
-	ft_strcpy(str, s1);
-	ft_strcat(str, s2);
-	if (str == 0)
-		return (0);
-	return (str);
+	if (ft_strcmp(name, ".") == 0)
+	{
+		//free(path);
+		return (name);
+	}
+	if (ft_strcmp(name, "..") == 0)
+	{
+		//free(path);
+		return (name);
+	}
+	return (ft_freejoin(path, name, 0));
 }
