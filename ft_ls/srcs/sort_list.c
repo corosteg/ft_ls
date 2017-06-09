@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 13:58:28 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/08 19:53:48 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/09 15:32:29 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,5 @@ s_ent		*sort_list(s_ent *list, t_ls tab)
 {
 	if (tab.t == 1)
 		return (sort_t(list));
-//	if (tab.r == 1)
-//		return (sort_r(list));
 	return (sort_simple(list));
 }

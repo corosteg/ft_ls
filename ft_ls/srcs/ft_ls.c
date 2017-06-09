@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:54:45 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/08 19:42:17 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/09 17:57:50 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,15 @@ t_ls		initialize_tab(t_ls tab)
 	return (tab);
 }
 
-s_ent		*stock_files_info(s_ent *list, struct dirent *ent, char *path)
-{
-	s_ent		*tmp;
-	char		*tmp2;
-
-	tmp = list;
-	tmp2 = ft_strdup(path);
-	if (list == NULL)
-	{
-		list = (s_ent*)malloc(sizeof(s_ent));
-		list->next = NULL;
-		list->file = ent;
-		if ((stat(ft_strjoin(tmp2, list->file->d_name), &list->fstat)) == -1)
-			error_print(tmp2);
-		free(tmp2);
-		return (list);
-	}
-	while(tmp->next)
-		tmp = tmp->next;
-	tmp->next = (s_ent*)malloc(sizeof(s_ent));
-	tmp = tmp->next;
-	tmp->next = NULL;
-	tmp->file = ent;
-	if (stat(ft_strjoin(tmp2, tmp->file->d_name), &tmp->fstat) == -1)
-		error_print(tmp2);
-	free(tmp2);
-	return (list);
-}
-
 void		print_list(s_ent *list)
 {
 	while (list)
 	{
-		printf("%s = %lli\n", list->file->d_name, list->fstat.st_size);
+		if (S_ISREG(list->fstat.st_mode))
+			printf ("is file ");
+		//if (S_IRSUR == list->fstat.st_mode)
+		//	printf ("droit de lecture ");
+		printf("%s = %s\n", list->file->d_name, ctime(&list->fstat.st_mtime));
 		list = list->next;
 	}
 }
