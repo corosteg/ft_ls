@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:55:48 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/09 17:20:22 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/14 18:00:36 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ typedef struct		t_ls
 
 typedef	struct		s_ent
 {
-	int				nb;
+	char			*path;
+	char			*rights;
+	char			*size;
+	char			*nlink;
+	char			*date;
 	struct dirent	*file;
 	struct stat		fstat;
 	struct s_ent	*next;
@@ -52,5 +56,6 @@ char			*change_path(char *path, char *name);
 s_ent			*stock_files_info(s_ent *list, struct dirent *ent, char *pah);
 int				error_print(char *path);
 s_ent			*stock_more_info(s_ent *list);
+void			ls_print(s_ent *list, t_ls tab);
 
 #endif

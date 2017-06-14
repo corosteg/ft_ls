@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 13:21:36 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/09 17:36:58 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/14 15:03:41 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ s_ent		*stock_info(s_ent *elem, struct dirent *ent, char *path)
 	elem->file = ent;
 	if ((stat(ft_strjoin(path, elem->file->d_name), &elem->fstat)) == -1)
 		error_print(path);
-	elem->usr = getpwuid(elem->fstat.st_uid);
-	elem->group = getgrgid(elem->fstat.st_gid);
+	elem->path = ft_strjoin(path, elem->file->d_name);
 	return (elem);
 }
 

@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 13:58:28 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/09 15:32:29 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/14 15:05:34 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@ void		swap_list(s_ent *list, s_ent *tmp)
 {
 	struct dirent		*tmp_file;
 	struct stat			tmp_fstat;
+	char				*str;
 
+	str = list->path;
 	tmp_file = list->file;
 	tmp_fstat = list->fstat;
 	list->fstat = tmp->fstat;
 	list->file = tmp->file;
+	list->path = tmp->path;
 	tmp->file = tmp_file;
 	tmp->fstat = tmp_fstat;
+	tmp->path = str;
 }
 
 s_ent		*sort_simple(s_ent *list)
