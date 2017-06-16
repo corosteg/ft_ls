@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:54:45 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/14 17:56:50 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/16 15:46:37 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,10 @@ t_ls		initialize_tab(t_ls tab)
 	tab.l = 0;
 	tab.r = 0;
 	tab.t = 0;
+	tab.blocks = 0;
+	tab.zero = 0;
 	return (tab);
 }
-
-/*void		ls_print(s_ent *list, t_ls tab)
-{
-	while (list)
-	{
-		ft_print("%s  %d %s  %s  %d\n", list->rights, list->fstat.st_nlink,
-				list->usr->pw_name, list->group->gr_name,
-				list->fstat.st_size);
-		list = list->next;
-	}
-}*/
 
 void		print_list(s_ent *list)
 {
@@ -54,7 +45,8 @@ void		print_list(s_ent *list)
 		//if (S_IRSUR == list->fstat.st_mode)
 		//	printf ("droit de lecture ");
 		str = ctime(&list->fstat.st_mtime);
-		printf("rights = %s %s = %lli\n", list->rights, list->path, list->fstat.st_size);
+		//printf("rights = %s %s = %lli\n", list->rights, list->path, list->fstat.st_size);
+		printf("date = %s", str);
 		list = list->next;
 	}
 }
@@ -71,9 +63,11 @@ int			ft_ls(char *path, t_ls tab)
 	while ((ent = readdir(rep)))
 		list = stock_files_info(list, ent, path);
 	list = sort_list(list, tab);
-	list = stock_more_info(list);
-	//ls_print(list, tab);
-	print_list(list);
+	tab = stock_more_info(list, tab);
+	ls_print(list, tab, 0);
+	closedir(rep);
+	free(path);
+	//print_list(list);
 	return (0);
 }
 
@@ -96,7 +90,10 @@ int			main(int ac, char **av)
 	else
 		while (a < ac)
 		{
-			ft_ls(ft_strdup(av[a]), tab);
+			if (av[a][ft_strlen(av[a]) - 1] != '/')
+				ft_ls(ft_strjoin(av[a], "/"), tab);
+			else
+				ft_ls(ft_strdup(av[a]), tab);
 			a++;
 		}
 	return (0);

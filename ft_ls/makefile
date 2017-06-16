@@ -6,7 +6,7 @@
 #    By: corosteg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/10 13:46:33 by corosteg          #+#    #+#              #
-#    Updated: 2017/06/14 17:54:38 by corosteg         ###   ########.fr        #
+#    Updated: 2017/06/15 18:16:51 by corosteg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ FLAGS =
 SRCS = ./srcs/ft_ls.c \
 	   ./srcs/check_flags.c \
 	   ./srcs/sort_list.c \
-	   ./srcs/ft_ls_1.c \
 	   ./srcs/stock_file_info.c \
 	   ./srcs/stock_more_info.c \
 	   ./srcs/ls_print.c \
+	   ./srcs/date_conversion.c \
 	   ./srcs/itoa_space.c
 
 all: $(NAME)

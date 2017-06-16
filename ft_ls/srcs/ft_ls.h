@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:55:48 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/14 18:00:36 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/16 15:34:17 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct		t_ls
 	int				r;
 	int				t;
 	int				zero;
+	long long		blocks;
+	char			*cblocks;
 }					t_ls;
 
 typedef	struct		s_ent
@@ -40,6 +42,7 @@ typedef	struct		s_ent
 	char			*rights;
 	char			*size;
 	char			*nlink;
+	char			*link;
 	char			*date;
 	struct dirent	*file;
 	struct stat		fstat;
@@ -55,7 +58,9 @@ s_ent			*sort_list(s_ent *list, t_ls tab);
 char			*change_path(char *path, char *name);
 s_ent			*stock_files_info(s_ent *list, struct dirent *ent, char *pah);
 int				error_print(char *path);
-s_ent			*stock_more_info(s_ent *list);
-void			ls_print(s_ent *list, t_ls tab);
+t_ls			stock_more_info(s_ent *list, t_ls tab);
+void			ls_print(s_ent *list, t_ls tab, int i);
+void			itoa_space(s_ent *list, long long size, long long nl);
+void			date_conversion(s_ent *list);
 
 #endif

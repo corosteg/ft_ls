@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 13:21:36 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/14 15:03:41 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/16 16:14:42 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ s_ent		*assign_prev(s_ent *list, s_ent *tmp)
 	return (elem);
 }
 
+int			check_link(s_ent *tmp)
+{
+	char	buf[256];
+	int		ret;
+
+	if ((ret = readlink(tmp->path, buf, 256)) != -1)
+	{
+		buf[ret] = '\0';
+		tmp->link = ft_strdup(buf);
+		return (1);
+	}
+	else
+		tmp->link = NULL;
+	return (0);
+}
+
 s_ent		*stock_info(s_ent *elem, struct dirent *ent, char *path)
 {
 	elem->next = NULL;
@@ -29,6 +45,9 @@ s_ent		*stock_info(s_ent *elem, struct dirent *ent, char *path)
 	if ((stat(ft_strjoin(path, elem->file->d_name), &elem->fstat)) == -1)
 		error_print(path);
 	elem->path = ft_strjoin(path, elem->file->d_name);
+	if (check_link(elem))
+		if ((lstat(elem->path, &elem->fstat)) == -1)
+			error_print(path);
 	return (elem);
 }
 

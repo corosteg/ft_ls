@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 17:13:07 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/14 17:34:47 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/16 15:51:23 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,34 @@ void		simple_print(s_ent *list, t_ls tab)
 	
 }
 
-void		l_print(s_ent *list, t_ls tab)
+int			l_print(s_ent *list, t_ls tab, int i)
 {
+	if (i == 0)
+		ft_print("total %s\n", tab.cblocks);
 	if (tab.a == 1)
-	{
-		ft_print("%s  %d %s  %s  %d   %s\n", list->rights, list->fstat.st_nlink,
-			list->usr->pw_name, list->group->gr_name,
-			list->fstat.st_size, list->file->d_name);
-	}
+		if (list->link == NULL)
+			ft_print("%s  %s %s  %s  %s %s %s\n", list->rights, list->nlink,
+				list->usr->pw_name, list->group->gr_name,
+				list->size, list->date, list->file->d_name);
+		else
+			ft_print("%s  %s %s  %s  %s %s %s -> %s\n", list->rights,
+				list->nlink, list->usr->pw_name, list->group->gr_name,
+				list->size, list->date, list->file->d_name, list->link);
 	else if (tab.a != 1 && list->file->d_name[0] != '.')
-		ft_print("%s  %d %s  %s  %d   %s\n", list->rights, list->fstat.st_nlink,
-			list->usr->pw_name, list->group->gr_name,
-			list->fstat.st_size, list->file->d_name);
-
+	{
+		if (list->link == NULL)
+			ft_print("%s  %s %s  %s  %s %s %s\n", list->rights, list->nlink,
+				list->usr->pw_name, list->group->gr_name,
+				list->size, list->date, list->file->d_name);
+		else
+			ft_print("%s  %s %s  %s  %s %s %s -> %s\n", list->rights,
+				list->nlink, list->usr->pw_name, list->group->gr_name,
+				list->size, list->date, list->file->d_name, list->link);
+	}
+	return (42);
 }
 
-void		ls_print(s_ent *list, t_ls tab)
+void		ls_print(s_ent *list, t_ls tab, int i)
 {
 	if (tab.r == 1)
 	{
@@ -41,7 +53,7 @@ void		ls_print(s_ent *list, t_ls tab)
 		while (list)
 		{
 			if (tab.l == 1)
-				l_print(list, tab);
+				i = l_print(list, tab, i);
 			else
 				simple_print(list, tab);
 			list = list->prev;
@@ -52,7 +64,7 @@ void		ls_print(s_ent *list, t_ls tab)
 		while (list)
 		{
 			if (tab.l == 1)
-				l_print(list, tab);
+				i = l_print(list, tab, i);
 			else
 				simple_print(list, tab);
 			list = list->next;
