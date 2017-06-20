@@ -6,11 +6,28 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 13:21:36 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/16 16:14:42 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/20 16:04:26 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+s_ent		*create_link(s_ent *link)
+{
+	link = (s_ent*)malloc(sizeof(s_ent));
+	link->path = NULL;
+	link->rights = NULL;
+	link->size = NULL;
+	link->nlink = NULL;
+	link->link = NULL;
+	link->date = NULL;
+	link->file = NULL;
+	link->usr = NULL;
+	link->group = NULL;
+	link->gr_name = NULL;
+	link->usr_name = NULL;
+	return (link);
+}
 
 s_ent		*assign_prev(s_ent *list, s_ent *tmp)
 {
@@ -41,7 +58,8 @@ int			check_link(s_ent *tmp)
 s_ent		*stock_info(s_ent *elem, struct dirent *ent, char *path)
 {
 	elem->next = NULL;
-	elem->file = ent;
+	elem->file = (file*)malloc(sizeof(file));
+	elem->file->d_name = ft_strdup(ent->d_name);
 	if ((stat(ft_strjoin(path, elem->file->d_name), &elem->fstat)) == -1)
 		error_print(path);
 	elem->path = ft_strjoin(path, elem->file->d_name);
@@ -59,14 +77,14 @@ s_ent		*stock_files_info(s_ent *list, struct dirent *ent, char *path)
 	tmp = list;
 	if (list == NULL)
 	{
-		list = (s_ent*)malloc(sizeof(s_ent));
+		list = create_link(list);
 		list = stock_info(list, ent, path);
 		list->prev = NULL;
 		return (list);
 	}
 	while(tmp->next)
 		tmp = tmp->next;
-	tmp->next = (s_ent*)malloc(sizeof(s_ent));
+	tmp->next = create_link(tmp);
 	tmp = tmp->next;
 	tmp = stock_info(tmp, ent, path);
 	tmp->prev = assign_prev(list, tmp);

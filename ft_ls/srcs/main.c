@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:54:04 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/07 18:22:42 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/19 14:24:02 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,7 @@ int				main(int ac, char **av)
 	}
 	while ((ent = readdir(rep)))
 	{
-		//c = ent->d_type;
-		//i = c;
-		tmp = ft_strdup(path);
-		if (ent->d_name[0] == '.' && ent->d_name[1] == '\0')
-			stat(".", info->fstat);
-		else if (ent->d_name[0] == '.' && ent->d_name[1] == '.')
-			stat("..", info->fstat);
-		else if (ent->d_type == 4)
-		{
-			ft_strjoin(tmp, "/");
-			stat(ft_strjoin(path, ent->d_name), info->fstat);
-		}
-		else
-			stat(ft_strjoin(tmp, ent->d_name), info->fstat);
-		printf("%s : ", ent->d_name);
-		printf("%lli       type : %d       inode : %lli\n",
-				info->fstat->st_size, ent->d_type, ent->d_ino);
-		/* lien symbolique d_type(lli)8, lien physique d_type(lli)10*/
+		printf("%s\n", ent->d_name);
 	}
 	return (ac);
 }

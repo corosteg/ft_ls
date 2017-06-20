@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:54:45 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/16 15:46:37 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/20 16:33:57 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,17 @@ t_ls		initialize_tab(t_ls tab)
 	return (tab);
 }
 
-void		print_list(s_ent *list)
+void		big_r(s_ent *list, t_ls tab)
 {
-	char	*str;
-
 	while (list)
 	{
-	//	if (S_ISREG(list->fstat.st_mode))
-	//		printf ("is file ");
-		//if (S_IRSUR == list->fstat.st_mode)
-		//	printf ("droit de lecture ");
-		str = ctime(&list->fstat.st_mtime);
-		//printf("rights = %s %s = %lli\n", list->rights, list->path, list->fstat.st_size);
-		printf("date = %s", str);
+		if (S_ISDIR(list->fstat.st_mode)
+			&& ((ft_strcmp(list->file->d_name, ".") != 0)
+			&& (ft_strcmp(list->file->d_name, "..") != 0)))
+		{
+			ft_print("\n%s:\n", list->path);
+			ft_ls(list->path, tab);
+		}
 		list = list->next;
 	}
 }
@@ -57,7 +55,9 @@ int			ft_ls(char *path, t_ls tab)
 	s_ent			*list;
 	struct dirent	*ent;
 
-	list = NULL;
+	list = NULL;;
+	if (path[ft_strlen(path) - 1] != '/')
+		path = ft_strjoin(path, "/");
 	if (!(rep = opendir(path)))
 		return (error_print(path));
 	while ((ent = readdir(rep)))
@@ -65,9 +65,10 @@ int			ft_ls(char *path, t_ls tab)
 	list = sort_list(list, tab);
 	tab = stock_more_info(list, tab);
 	ls_print(list, tab, 0);
+	if (tab.br == 1)
+		big_r(list, tab);
 	closedir(rep);
 	free(path);
-	//print_list(list);
 	return (0);
 }
 
@@ -90,9 +91,6 @@ int			main(int ac, char **av)
 	else
 		while (a < ac)
 		{
-			if (av[a][ft_strlen(av[a]) - 1] != '/')
-				ft_ls(ft_strjoin(av[a], "/"), tab);
-			else
 				ft_ls(ft_strdup(av[a]), tab);
 			a++;
 		}

@@ -6,11 +6,37 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 17:52:22 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/15 19:09:35 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/20 16:57:23 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+char		*itoa_long(long long nb)
+{
+	int			i;
+	char		*str;
+	long long	tm;
+
+	i = 0;
+	tm = nb;
+	while (nb >= 10)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	if (!(str = (char*)malloc(sizeof(str) * (i + 1))))
+		return (0);
+	str[i + 1] = '\0';
+	nb = tm;
+	while (i >= 0)
+	{
+		str[i] = (nb % 10) + '0';
+		nb = nb / 10;
+		i--;
+	}
+	return (str);
+}
 
 char			*conversion(long long size, int i)
 {
@@ -18,7 +44,7 @@ char			*conversion(long long size, int i)
 	int		s;
 
 	s = 0;
-	str = (char*)malloc(sizeof(str) * i);
+	str = (char*)malloc(sizeof(char) * (i + 1));
 	if (str == NULL)
 		return (0);
 	str[i + 1] = '\0';

@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 13:58:28 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/16 16:25:29 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/19 14:57:46 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		swap_list(s_ent *list, s_ent *tmp)
 {
-	struct dirent		*tmp_file;
+	struct file			*tmp_file;
 	struct stat			tmp_fstat;
 	char				*str;
 	char				*tmp_link;

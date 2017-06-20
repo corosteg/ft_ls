@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 15:08:05 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/16 16:01:41 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/20 16:27:46 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,51 @@ char		*type_infos(s_ent *tmp)
 	return ft_strdup("-");
 }
 
-char		*itoa_long(long long nb)
+char		*allocate_with_space(char *name, int i)
 {
-	int			i;
-	char		*str;
-	long long	tm;
+	int			max;
+	char		*final;
 
+	final = (char*)malloc(sizeof(char) * (i + 1));
+	final[i + 1] = '\0';
+	max = i;
 	i = 0;
-	tm = nb;
-	while (nb >= 10)
+	while (name[i])
 	{
-		nb = nb / 10;
+		final[i] = name[i];
 		i++;
 	}
-	if (!(str = (char*)malloc(sizeof(str) * (i))))
-		return (0);
-	str[i] = '\0';
-	nb = tm;
-	while (i >= 0)
+	while (i < max)
 	{
-		str[i] = (nb % 10) + '0';
-		nb = nb / 10;
-		i--;
+		final[i] = ' ';
+		i++;
 	}
-	return (str);
+	return (final);
+}
+
+void		check_gr_usr_name(s_ent *list)
+{
+	int		gr;
+	int		usr;
+	s_ent	*tmp;
+
+	gr = 0;
+	usr = 0;
+	tmp = list;
+	while (tmp)
+	{
+		if (gr < ft_strlen(tmp->group->gr_name))
+			gr = ft_strlen(tmp->group->gr_name);
+		if (usr < ft_strlen(tmp->usr->pw_name))
+			usr = ft_strlen(tmp->usr->pw_name);
+		tmp = tmp->next;;
+	}
+	while (list)
+	{
+		list->gr_name = allocate_with_space(list->group->gr_name, gr);
+		list->usr_name = allocate_with_space(list->usr->pw_name, usr);
+		list = list->next;
+	}
 }
 
 t_ls		stock_more_info(s_ent *list, t_ls tab)
@@ -103,5 +124,6 @@ t_ls		stock_more_info(s_ent *list, t_ls tab)
 	tab.cblocks = itoa_long(tab.blocks);
 	itoa_space(list, 0, 0);
 	date_conversion(list);
+	check_gr_usr_name(list);
 	return (tab);
 }
