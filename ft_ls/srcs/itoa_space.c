@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 17:52:22 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/20 16:57:23 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/22 17:35:30 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char			*conversion(long long size, int i)
 	int		s;
 
 	s = 0;
+	i++;
 	str = (char*)malloc(sizeof(char) * (i + 1));
 	if (str == NULL)
 		return (0);
@@ -76,24 +77,40 @@ int				large_check(long long size)
 	return (i);
 }
 
-void			itoa_space(s_ent *list, long long size, long long nl)
+void			itoa_space(s_ent *list, long long size, long long nl, t_ls tab)
 {
 	s_ent			*tmp;
 
 	tmp = list;
 	while (tmp)
 	{
-		if (tmp->fstat.st_size > size)
-			size = tmp->fstat.st_size;
-		if (tmp->fstat.st_nlink > nl)
-			nl = tmp->fstat.st_nlink;
+		if (tmp->i != 0)
+		{
+			if (tab.a == 1)
+			{
+				if (tmp->fstat.st_size > size)
+					size = tmp->fstat.st_size;
+				if (tmp->fstat.st_nlink > nl)
+					nl = tmp->fstat.st_nlink;
+			}
+			else
+			{
+				if (tmp->fstat.st_size > size && tmp->file->d_name[0] != '.')
+					size = tmp->fstat.st_size;
+				if (tmp->fstat.st_nlink > nl && tmp->file->d_name[0] != '.')
+					nl = tmp->fstat.st_nlink;
+			}
+		}
 		tmp = tmp->next;
 	}
 	tmp = list;
 	while (tmp)
 	{
-		tmp->size = conversion(tmp->fstat.st_size, large_check(size));
-		tmp->nlink = conversion(tmp->fstat.st_nlink, large_check(nl));
+		if (tmp->i != 0)
+		{
+			tmp->size = conversion(tmp->fstat.st_size, (large_check(size)) - 1);
+			tmp->nlink = conversion(tmp->fstat.st_nlink, large_check(nl));
+		}
 		tmp = tmp->next;
 	}
 }

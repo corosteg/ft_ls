@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 17:13:07 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/20 16:17:03 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/22 16:22:37 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int			l_print(s_ent *list, t_ls tab, int i)
 {
 	if (i == 0)
 		ft_print("total %s\n", tab.cblocks);
+	if (list->i == 0)
+		return (42);
 	if (tab.a == 1)
 		if (list->link == NULL)
 			ft_print("%s %s %s  %s  %s %s %s\n", list->rights, list->nlink,

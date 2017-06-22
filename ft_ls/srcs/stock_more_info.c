@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 15:08:05 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/20 16:27:46 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/22 17:38:10 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,22 @@ void		check_gr_usr_name(s_ent *list)
 	tmp = list;
 	while (tmp)
 	{
-		if (gr < ft_strlen(tmp->group->gr_name))
-			gr = ft_strlen(tmp->group->gr_name);
-		if (usr < ft_strlen(tmp->usr->pw_name))
-			usr = ft_strlen(tmp->usr->pw_name);
+		if (tmp->i != 0)
+		{
+			if (gr < ft_strlen(tmp->group->gr_name))
+				gr = ft_strlen(tmp->group->gr_name);
+			if (usr < ft_strlen(tmp->usr->pw_name))
+				usr = ft_strlen(tmp->usr->pw_name);
+		}
 		tmp = tmp->next;;
 	}
 	while (list)
 	{
-		list->gr_name = allocate_with_space(list->group->gr_name, gr);
-		list->usr_name = allocate_with_space(list->usr->pw_name, usr);
+		if (list->i != 0)
+		{
+			list->gr_name = allocate_with_space(list->group->gr_name, gr);
+			list->usr_name = allocate_with_space(list->usr->pw_name, usr);
+		}
 		list = list->next;
 	}
 }
@@ -111,18 +117,21 @@ t_ls		stock_more_info(s_ent *list, t_ls tab)
 	tmp = list;
 	while(tmp)
 	{
-		tmp->usr = getpwuid(tmp->fstat.st_uid);
-		tmp->group = getgrgid(tmp->fstat.st_gid);
-		tmp->rights = type_infos(tmp);
-		tmp->rights = rights_infos(tmp, tmp->rights);
-		if (tab.a == 1)
-			tab.blocks = tab.blocks + tmp->fstat.st_blocks;
-		else if (tmp->file->d_name[0] != '.')
-			tab.blocks = tab.blocks + tmp->fstat.st_blocks;
+		if (tmp->i != 0)
+		{
+			tmp->usr = getpwuid(tmp->fstat.st_uid);
+			tmp->group = getgrgid(tmp->fstat.st_gid);
+			tmp->rights = type_infos(tmp);
+			tmp->rights = rights_infos(tmp, tmp->rights);
+			if (tab.a == 1)
+				tab.blocks = tab.blocks + tmp->fstat.st_blocks;
+			else if (tmp->file->d_name[0] != '.')
+				tab.blocks = tab.blocks + tmp->fstat.st_blocks;
+		}
 		tmp = tmp->next;
 	}
 	tab.cblocks = itoa_long(tab.blocks);
-	itoa_space(list, 0, 0);
+	itoa_space(list, 0, 0, tab);
 	date_conversion(list);
 	check_gr_usr_name(list);
 	return (tab);

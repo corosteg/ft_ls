@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 13:21:36 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/20 16:04:26 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/22 17:36:00 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 s_ent		*create_link(s_ent *link)
 {
 	link = (s_ent*)malloc(sizeof(s_ent));
+	link->i = 42;
 	link->path = NULL;
 	link->rights = NULL;
 	link->size = NULL;
@@ -55,21 +56,21 @@ int			check_link(s_ent *tmp)
 	return (0);
 }
 
-s_ent		*stock_info(s_ent *elem, struct dirent *ent, char *path)
+s_ent		*stock_info(s_ent *elem, struct dirent *ent, char *path, t_ls tab)
 {
 	elem->next = NULL;
 	elem->file = (file*)malloc(sizeof(file));
 	elem->file->d_name = ft_strdup(ent->d_name);
 	if ((stat(ft_strjoin(path, elem->file->d_name), &elem->fstat)) == -1)
-		error_print(path);
+		elem->i = error_print(elem->file->d_name, tab);
 	elem->path = ft_strjoin(path, elem->file->d_name);
 	if (check_link(elem))
 		if ((lstat(elem->path, &elem->fstat)) == -1)
-			error_print(path);
+			elem->i = error_print(elem->file->d_name, tab);
 	return (elem);
 }
 
-s_ent		*stock_files_info(s_ent *list, struct dirent *ent, char *path)
+s_ent		*stock_files_info(s_ent *list, struct dirent *ent, char *path, t_ls tab)
 {
 	s_ent		*tmp;
 	char		*tmp2;
@@ -78,7 +79,7 @@ s_ent		*stock_files_info(s_ent *list, struct dirent *ent, char *path)
 	if (list == NULL)
 	{
 		list = create_link(list);
-		list = stock_info(list, ent, path);
+		list = stock_info(list, ent, path, tab);
 		list->prev = NULL;
 		return (list);
 	}
@@ -86,7 +87,7 @@ s_ent		*stock_files_info(s_ent *list, struct dirent *ent, char *path)
 		tmp = tmp->next;
 	tmp->next = create_link(tmp);
 	tmp = tmp->next;
-	tmp = stock_info(tmp, ent, path);
+	tmp = stock_info(tmp, ent, path, tab);
 	tmp->prev = assign_prev(list, tmp);
 	return (list);
 }

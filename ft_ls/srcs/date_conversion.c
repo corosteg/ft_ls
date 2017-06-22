@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/15 15:26:17 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/16 14:45:37 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/22 17:37:14 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,18 @@ void			date_conversion(s_ent *list)
 	tmp = list;
 	while (tmp)
 	{
-		str = ft_strdup(ctime(&tmp->fstat.st_mtime));
-		now = time(NULL);
-		str2 = ft_strdup(ctime(&now));
-		if (ft_strcmp(&str[20], &str2[20]) != 0)
-			tmp->date = change_date_year(str);
-		else
-			tmp->date = change_date(str);
-		free(str);
-		free(str2);
+		if (tmp->i != 0)
+		{
+			str = ft_strdup(ctime(&tmp->fstat.st_mtime));
+			now = time(NULL);
+			str2 = ft_strdup(ctime(&now));
+			if (ft_strcmp(&str[20], &str2[20]) != 0)
+				tmp->date = change_date_year(str);
+			else
+				tmp->date = change_date(str);
+			free(str);
+			free(str2);
+		}
 		tmp = tmp->next;
 	}
 }

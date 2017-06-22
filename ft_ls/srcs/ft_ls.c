@@ -6,19 +6,24 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:54:45 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/20 16:33:57 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/22 16:39:12 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int			error_print(char *path)
+int			error_print(char *path, t_ls tab)
 {
 		ft_print("ft_ls: ");
-	if (!ft_strncmp(path, "./", 2))
-		perror(&path[2]);
-	if (ft_strncmp(path, "./", 2))
-		perror(path);
+	if (tab.a == 1 || path[0] != '.')
+	{
+		if (!ft_strncmp(path, "./", 2))
+			perror(&path[2]);
+		if (ft_strncmp(path, "./", 2))
+			perror(path);
+	}
+	else
+		return (0);
 	return (0);
 }
 
@@ -29,8 +34,10 @@ t_ls		initialize_tab(t_ls tab)
 	tab.l = 0;
 	tab.r = 0;
 	tab.t = 0;
+	tab.prpath = 0;
 	tab.blocks = 0;
 	tab.zero = 0;
+	tab.cblocks = NULL;
 	return (tab);
 }
 
@@ -43,6 +50,7 @@ void		big_r(s_ent *list, t_ls tab)
 			&& (ft_strcmp(list->file->d_name, "..") != 0)))
 		{
 			ft_print("\n%s:\n", list->path);
+			tab.blocks = 0;
 			ft_ls(list->path, tab);
 		}
 		list = list->next;
@@ -59,9 +67,9 @@ int			ft_ls(char *path, t_ls tab)
 	if (path[ft_strlen(path) - 1] != '/')
 		path = ft_strjoin(path, "/");
 	if (!(rep = opendir(path)))
-		return (error_print(path));
+		return (error_print(path, tab));
 	while ((ent = readdir(rep)))
-		list = stock_files_info(list, ent, path);
+		list = stock_files_info(list, ent, path, tab);
 	list = sort_list(list, tab);
 	tab = stock_more_info(list, tab);
 	ls_print(list, tab, 0);
@@ -78,7 +86,7 @@ int			main(int ac, char **av)
 	t_ls	tab;
 
 	a = 1;
-	initialize_tab(tab);
+	tab = initialize_tab(tab);
 	while (a < ac && av[a][0] == '-' && av[a][1] != '\0')
 	{
 		tab = check_flags(av[a], tab);

@@ -6,7 +6,7 @@
 #    By: corosteg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/10 13:46:33 by corosteg          #+#    #+#              #
-#    Updated: 2017/06/15 18:16:51 by corosteg         ###   ########.fr        #
+#    Updated: 2017/06/21 19:45:23 by corosteg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ls
 LIB_PATH = ./srcs/libft/
 LIB = $(LIB_PATH)/libft.a
 CC = gcc
-FLAGS =
+FLAGS = -g
 SRCS = ./srcs/ft_ls.c \
 	   ./srcs/check_flags.c \
 	   ./srcs/sort_list.c \
