@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 17:52:22 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/22 17:35:30 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/27 16:03:36 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char			*conversion(long long size, int i)
 
 	s = 0;
 	i++;
-	str = (char*)malloc(sizeof(char) * (i + 1));
+	str = (char*)malloc(sizeof(char) * (i + 2));
 	if (str == NULL)
 		return (0);
 	str[i + 1] = '\0';

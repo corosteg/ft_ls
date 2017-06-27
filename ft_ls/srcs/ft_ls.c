@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:54:45 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/22 16:39:12 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/27 18:53:44 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int			error_print(char *path, t_ls tab)
 {
-		ft_print("ft_ls: ");
 	if (tab.a == 1 || path[0] != '.')
 	{
+		ft_print("ft_ls: ");
 		if (!ft_strncmp(path, "./", 2))
 			perror(&path[2]);
 		if (ft_strncmp(path, "./", 2))
@@ -38,23 +38,8 @@ t_ls		initialize_tab(t_ls tab)
 	tab.blocks = 0;
 	tab.zero = 0;
 	tab.cblocks = NULL;
+	tab.err_name = NULL;
 	return (tab);
-}
-
-void		big_r(s_ent *list, t_ls tab)
-{
-	while (list)
-	{
-		if (S_ISDIR(list->fstat.st_mode)
-			&& ((ft_strcmp(list->file->d_name, ".") != 0)
-			&& (ft_strcmp(list->file->d_name, "..") != 0)))
-		{
-			ft_print("\n%s:\n", list->path);
-			tab.blocks = 0;
-			ft_ls(list->path, tab);
-		}
-		list = list->next;
-	}
 }
 
 int			ft_ls(char *path, t_ls tab)
@@ -63,7 +48,7 @@ int			ft_ls(char *path, t_ls tab)
 	s_ent			*list;
 	struct dirent	*ent;
 
-	list = NULL;;
+	list = NULL;
 	if (path[ft_strlen(path) - 1] != '/')
 		path = ft_strjoin(path, "/");
 	if (!(rep = opendir(path)))
@@ -76,6 +61,7 @@ int			ft_ls(char *path, t_ls tab)
 	if (tab.br == 1)
 		big_r(list, tab);
 	closedir(rep);
+	erase_all(list);
 	free(path);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:55:48 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/22 16:29:32 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/27 18:53:41 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		t_ls
 	int				zero;
 	long long		blocks;
 	char			*cblocks;
+	char			*err_name;
 }					t_ls;
 
 typedef struct		file
@@ -73,5 +74,7 @@ void			itoa_space(s_ent *list, long long size, long long nl, t_ls tab);
 char			*itoa_long(long long nb);
 void			date_conversion(s_ent *list);
 int				ft_ls(char *path, t_ls tab);
+void			erase_all(s_ent *list);
+void			big_r(s_ent *list, t_ls tab);
 
 #endif

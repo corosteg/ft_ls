@@ -6,7 +6,7 @@
 #    By: corosteg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/10 13:46:33 by corosteg          #+#    #+#              #
-#    Updated: 2017/06/21 19:45:23 by corosteg         ###   ########.fr        #
+#    Updated: 2017/06/27 18:24:27 by corosteg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRCS = ./srcs/ft_ls.c \
 	   ./srcs/stock_more_info.c \
 	   ./srcs/ls_print.c \
 	   ./srcs/date_conversion.c \
+	   ./srcs/erase_all.c \
+	   ./srcs/big_r.c \
 	   ./srcs/itoa_space.c
 
 all: $(NAME)

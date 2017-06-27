@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/15 15:26:17 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/22 17:37:14 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/27 16:05:04 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char			*change_date_year(char *str)
 {
 	char		*final;
 
-	final = (char*)malloc(sizeof(char) * 12);
+	final = (char*)malloc(sizeof(char) * 13);
 	final[12] = '\0';
 	final[0] = str[8];
 	final[1] = str[9];
@@ -37,7 +37,7 @@ char			*change_date(char *str)
 {
 	char		*final;
 
-	final = (char*)malloc(sizeof(char) * 12);
+	final = (char*)malloc(sizeof(char) * 13);
 	final[12] = '\0';
 	final[0] = str[8];
 	final[1] = str[9];

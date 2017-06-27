@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 15:08:05 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/22 17:38:10 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/27 16:14:24 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char		*allocate_with_space(char *name, int i)
 	char		*final;
 
 	final = (char*)malloc(sizeof(char) * (i + 1));
-	final[i + 1] = '\0';
+	final[i] = '\0';
 	max = i;
 	i = 0;
 	while (name[i])
@@ -76,6 +76,7 @@ char		*allocate_with_space(char *name, int i)
 		final[i] = ' ';
 		i++;
 	}
+	free(name);
 	return (final);
 }
 
@@ -92,19 +93,19 @@ void		check_gr_usr_name(s_ent *list)
 	{
 		if (tmp->i != 0)
 		{
-			if (gr < ft_strlen(tmp->group->gr_name))
-				gr = ft_strlen(tmp->group->gr_name);
-			if (usr < ft_strlen(tmp->usr->pw_name))
-				usr = ft_strlen(tmp->usr->pw_name);
+			if (gr < ft_strlen(tmp->gr_name))
+				gr = ft_strlen(tmp->gr_name);
+			if (usr < ft_strlen(tmp->usr_name))
+				usr = ft_strlen(tmp->usr_name);
 		}
-		tmp = tmp->next;;
+		tmp = tmp->next;
 	}
 	while (list)
 	{
 		if (list->i != 0)
 		{
-			list->gr_name = allocate_with_space(list->group->gr_name, gr);
-			list->usr_name = allocate_with_space(list->usr->pw_name, usr);
+			list->gr_name = allocate_with_space(list->gr_name, gr);
+			list->usr_name = allocate_with_space(list->usr_name, usr);
 		}
 		list = list->next;
 	}
@@ -120,7 +121,9 @@ t_ls		stock_more_info(s_ent *list, t_ls tab)
 		if (tmp->i != 0)
 		{
 			tmp->usr = getpwuid(tmp->fstat.st_uid);
+			tmp->usr_name = ft_strdup(tmp->usr->pw_name);
 			tmp->group = getgrgid(tmp->fstat.st_gid);
+			tmp->gr_name = ft_strdup(tmp->group->gr_name);
 			tmp->rights = type_infos(tmp);
 			tmp->rights = rights_infos(tmp, tmp->rights);
 			if (tab.a == 1)

@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 13:21:36 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/22 17:36:00 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/27 14:30:01 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ s_ent		*stock_info(s_ent *elem, struct dirent *ent, char *path, t_ls tab)
 	elem->next = NULL;
 	elem->file = (file*)malloc(sizeof(file));
 	elem->file->d_name = ft_strdup(ent->d_name);
-	if ((stat(ft_strjoin(path, elem->file->d_name), &elem->fstat)) == -1)
+	elem->path = ft_strfreejoin(path, elem->file->d_name, 0);
+	if ((stat(elem->path, &elem->fstat)) == -1)
 		elem->i = error_print(elem->file->d_name, tab);
-	elem->path = ft_strjoin(path, elem->file->d_name);
 	if (check_link(elem))
 		if ((lstat(elem->path, &elem->fstat)) == -1)
 			elem->i = error_print(elem->file->d_name, tab);
