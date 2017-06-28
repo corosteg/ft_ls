@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 13:21:36 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/27 14:30:01 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/28 18:55:23 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ s_ent		*create_link(s_ent *link)
 	link->group = NULL;
 	link->gr_name = NULL;
 	link->usr_name = NULL;
+	link->file = NULL;
+	link->next = NULL;
+	link->usr = NULL;
+	link->group = NULL;
+	link->prev = NULL;
 	return (link);
 }
 

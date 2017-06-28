@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:54:45 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/27 18:53:44 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/28 19:37:50 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int			ft_ls(char *path, t_ls tab)
 
 	list = NULL;
 	if (path[ft_strlen(path) - 1] != '/')
-		path = ft_strjoin(path, "/");
-	if (!(rep = opendir(path)))
+		path = ft_strfreejoin(path, "/", 0);
+	if ((rep = opendir(path)) == NULL)
 		return (error_print(path, tab));
 	while ((ent = readdir(rep)))
 		list = stock_files_info(list, ent, path, tab);
@@ -62,6 +62,8 @@ int			ft_ls(char *path, t_ls tab)
 		big_r(list, tab);
 	closedir(rep);
 	erase_all(list);
+	free(tab.cblocks);
+	tab.cblocks = NULL;
 	free(path);
 	return (0);
 }

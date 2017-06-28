@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 13:58:28 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/19 14:57:46 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/28 18:55:11 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ s_ent		*sort_t(s_ent *list)
 	{
 		while (tmp)
 		{
-			if ((tmp2->fstat.st_mtime - tmp->fstat.st_mtime) < 0)
-				swap_list(tmp2, tmp);
+			if (tmp2->i != 0 && tmp->i != 0)
+				if ((tmp2->fstat.st_mtime - tmp->fstat.st_mtime) < 0)
+					swap_list(tmp2, tmp);
 			tmp = tmp->next;
 		}
 		tmp2 = tmp2->next;

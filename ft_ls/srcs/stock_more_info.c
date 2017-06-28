@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 15:08:05 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/27 16:14:24 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/28 19:25:03 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char		*rights_infos(s_ent *tmp, char *str)
 		str2[7] = 'w';
 	if (tmp->fstat.st_mode & S_IXOTH)
 		str2[8] = 'x';
-	return (ft_strjoin(str, str2));
+	return (ft_strfreejoin(str, str2, 3));
 }
 
 char		*type_infos(s_ent *tmp)

@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:23:57 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/27 18:40:45 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/28 18:57:52 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ void		big_r(s_ent *list, t_ls tab)
 			list = list->next;
 	while (list)
 	{
-		if (tab.a == 1 && S_ISDIR(list->fstat.st_mode))
-			big_r_a(list, tab);
-		else if (S_ISDIR(list->fstat.st_mode))
-			big_r_simple(list, tab);
+		if (list->i != 0)
+		{
+			if (tab.a == 1 && S_ISDIR(list->fstat.st_mode))
+				big_r_a(list, tab);
+			else if (S_ISDIR(list->fstat.st_mode))
+				big_r_simple(list, tab);
+		}
 		if (tab.r == 1)
 			list = list->prev;
 		else
