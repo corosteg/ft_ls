@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 15:08:05 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/28 19:25:03 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/29 16:28:51 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,31 +111,29 @@ void		check_gr_usr_name(s_ent *list)
 	}
 }
 
-t_ls		stock_more_info(s_ent *list, t_ls tab)
+t_ls		stock_more_info(s_ent *list, s_ent *list2, t_ls tab)
 {
-	s_ent	*tmp;
-
-	tmp = list;
-	while(tmp)
+	while(list)
 	{
-		if (tmp->i != 0)
+		if (list->i != 0)
 		{
-			tmp->usr = getpwuid(tmp->fstat.st_uid);
-			tmp->usr_name = ft_strdup(tmp->usr->pw_name);
-			tmp->group = getgrgid(tmp->fstat.st_gid);
-			tmp->gr_name = ft_strdup(tmp->group->gr_name);
-			tmp->rights = type_infos(tmp);
-			tmp->rights = rights_infos(tmp, tmp->rights);
+			list->usr = getpwuid(list->fstat.st_uid);
+			list->usr_name = ft_strdup(list->usr->pw_name);
+			list->group = getgrgid(list->fstat.st_gid);
+			list->gr_name = ft_strdup(list->group->gr_name);
+			list->rights = type_infos(list);
+			list->rights = rights_infos(list, list->rights);
+			list->rights = more_rights(list, list->rights);
 			if (tab.a == 1)
-				tab.blocks = tab.blocks + tmp->fstat.st_blocks;
-			else if (tmp->file->d_name[0] != '.')
-				tab.blocks = tab.blocks + tmp->fstat.st_blocks;
+				tab.blocks = tab.blocks + list->fstat.st_blocks;
+			else if (list->file->d_name[0] != '.')
+				tab.blocks = tab.blocks + list->fstat.st_blocks;
 		}
-		tmp = tmp->next;
+		list = list->next;
 	}
 	tab.cblocks = itoa_long(tab.blocks);
-	itoa_space(list, 0, 0, tab);
-	date_conversion(list);
-	check_gr_usr_name(list);
+	itoa_space(list2, 0, 0, tab);
+	date_conversion(list2);
+	check_gr_usr_name(list2);
 	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:54:45 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/28 19:37:50 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/29 16:42:47 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			ft_ls(char *path, t_ls tab)
 	while ((ent = readdir(rep)))
 		list = stock_files_info(list, ent, path, tab);
 	list = sort_list(list, tab);
-	tab = stock_more_info(list, tab);
+	tab = stock_more_info(list, list, tab);
 	ls_print(list, tab, 0);
 	if (tab.br == 1)
 		big_r(list, tab);

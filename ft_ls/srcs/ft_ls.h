@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:55:48 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/27 18:53:41 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/29 16:29:08 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ s_ent			*sort_list(s_ent *list, t_ls tab);
 char			*change_path(char *path, char *name);
 s_ent			*stock_files_info(s_ent *list, struct dirent *ent, char *pah, t_ls tab);
 int				error_print(char *path, t_ls tab);
-t_ls			stock_more_info(s_ent *list, t_ls tab);
+t_ls			stock_more_info(s_ent *list, s_ent *list2, t_ls tab);
 void			ls_print(s_ent *list, t_ls tab, int i);
 void			itoa_space(s_ent *list, long long size, long long nl, t_ls tab);
 char			*itoa_long(long long nb);
@@ -76,5 +76,6 @@ void			date_conversion(s_ent *list);
 int				ft_ls(char *path, t_ls tab);
 void			erase_all(s_ent *list);
 void			big_r(s_ent *list, t_ls tab);
+char			*more_rights(s_ent *list, char *str);
 
 #endif
