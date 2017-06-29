@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/15 15:26:17 by corosteg          #+#    #+#             */
-/*   Updated: 2017/06/27 16:05:04 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/06/29 18:01:31 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ char			*change_date(char *str)
 	return (final);
 }
 
+int				check_date(char *str, char *str2)
+{
+	return (0);
+}
+
 void			date_conversion(s_ent *list)
 {
 	s_ent		*tmp;
@@ -69,7 +74,8 @@ void			date_conversion(s_ent *list)
 			str = ft_strdup(ctime(&tmp->fstat.st_mtime));
 			now = time(NULL);
 			str2 = ft_strdup(ctime(&now));
-			if (ft_strcmp(&str[20], &str2[20]) != 0)
+			printf("str = %ld\nst2 = %ld\n\n", tmp->fstat.st_mtime, now);
+			if (check_date(str, str2))
 				tmp->date = change_date_year(str);
 			else
 				tmp->date = change_date(str);
